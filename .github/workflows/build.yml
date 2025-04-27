@@ -1,0 +1,16 @@
+on:
+  workflow_dispatch:
+
+jobs:
+  test_nim:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Install Nim for work flow
+        run: |
+          sudo apt-get update
+          sudo apt-get install nim
+      - name: Test Nim
+        shell: nim c -r - < {0}
+        run: |
+          echo NimVersion
+          echo currentSourcePath()
