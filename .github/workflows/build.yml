@@ -15,16 +15,17 @@ jobs:
           sudo apt-get install nim
       - name: Install Nim for work flow on Windows
         if: ${{ runner.os == 'Windows' }}
-        run: |
-          choco install nim
+        uses: crazy-max/ghaction-chocolatey@v3
+        with:
+          args: install nim
       - name: Test Nim
         shell: nim --eval:"cpFile(paramStr(3),\"x.nim\");selfExec\"c -r x.nim\"" skipper {0}
         run: |
-          import std/sugar
+          import std/[macros, sugar]
 
           dump CompileDate
           dump CompileTime
           dump NimVersion
-          dump currentSourcePath()
+          dump static getProjectPath()
           dump hostCPU
           dump hostOS
