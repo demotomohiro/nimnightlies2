@@ -7,7 +7,7 @@ if paramCount() > 0:
 
   let
     srcFile = paramStr(1)
-    nimSrcFile = changeFileExt(srcFile, "nim")
+    nimSrcFile = srcFile.parentDir / "prog.nim"
   moveFile srcFile, nimSrcFile
   quit execCmd("nim c -r " & nimSrcFile)
 else:
