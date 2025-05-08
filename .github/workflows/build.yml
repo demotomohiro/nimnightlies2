@@ -18,8 +18,16 @@ jobs:
         uses: crazy-max/ghaction-chocolatey@v3
         with:
           args: install nim
+      - name: Check out the repository to the runner
+        uses: actions/checkout@v4  
+      - name: Build nimact
+        run: nim c nimact/nimact.nim
+      - name: Add nimact directory to the system PATH variable
+        shell: bash
+        run: echo "$PWD/nimact" >> "$GITHUB_PATH"
       - name: Test Nim
-        shell: nim --eval:"cpFile(paramStr(3),\"x.nim\");selfExec\"c -r x.nim\"" skipper {0}
+      #shell: nim --eval:"cpFile(paramStr(3),\"x.nim\");selfExec\"c -r x.nim\"" skipper {0}
+        shell: nimact {0}
         run: |
           import std/[macros, sugar]
 
