@@ -21,6 +21,7 @@ jobs:
       - name: Check out the repository to the runner
         uses: actions/checkout@v4  
       - name: Build nimact
+        shell: bash
         run: nim c nimact/nimact.nim
       - name: Add nimact directory to the system PATH variable
         shell: bash
