@@ -20,6 +20,7 @@ jobs:
         #  args: install nim
         run: |
           choco install nim
+          refreshenv
           nim -v
       - name: Check out the repository to the runner
         uses: actions/checkout@v4  
