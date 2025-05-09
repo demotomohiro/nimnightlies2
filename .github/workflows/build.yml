@@ -19,11 +19,16 @@ jobs:
         #uses: crazy-max/ghaction-chocolatey@v3
         #with:
         #  args: install nim
+        #
+        # `refreshenv` updates PATH env variable so that you can call nim
+        # Last command try to get the parent directory of installed Nim and add it to GITHUB_PATH
+        # so that you can call nim in following `run`
         run: |
           choco install nim --no-progress
           Import-Module $env:ChocolateyInstall\helpers\chocolateyProfile.psm1
           refreshenv
           nim -v
+          Add-Content $env:GITHUB_PATH (Get-Item((Get-Command nim).Path)).DirectoryName
       - name: Check out the repository to the runner
         uses: actions/checkout@v4  
       - name: Build nimact
