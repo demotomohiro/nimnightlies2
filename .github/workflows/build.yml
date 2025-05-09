@@ -19,7 +19,8 @@ jobs:
         #with:
         #  args: install nim
         run: |
-          choco install nim
+          choco install nim --no-progress
+          Import-Module $env:ChocolateyInstall\helpers\chocolateyProfile.psm1
           refreshenv
           nim -v
       - name: Check out the repository to the runner
