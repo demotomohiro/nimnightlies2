@@ -15,9 +15,12 @@ jobs:
           sudo apt-get install nim
       - name: Install Nim for work flow on Windows
         if: ${{ runner.os == 'Windows' }}
-        uses: crazy-max/ghaction-chocolatey@v3
-        with:
-          args: install nim
+        #uses: crazy-max/ghaction-chocolatey@v3
+        #with:
+        #  args: install nim
+        run: |
+          choco install nim
+          nim -v
       - name: Check out the repository to the runner
         uses: actions/checkout@v4  
       - name: Build nimact
